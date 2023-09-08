@@ -26,8 +26,6 @@ public class ProjectionDecalRenderer implements Disposable {
 
     // The decal to render
     private ProjectionDecal decal;
-    // The main render camera
-    private Camera camera;
 
     public ProjectionDecalRenderer() {
         this.modelBatch = new ModelBatch(new DefaultShaderProvider() {
@@ -36,7 +34,6 @@ public class ProjectionDecalRenderer implements Disposable {
                 if (projectiveDecalShader == null) {
                     projectiveDecalShader = new ProjectiveDecalShader(renderable);
                     projectiveDecalShader.setDecal(decal);
-                    projectiveDecalShader.camera = camera;
                 }
                 return projectiveDecalShader;
             }
@@ -44,15 +41,13 @@ public class ProjectionDecalRenderer implements Disposable {
     }
     public void render(Camera camera, ProjectionDecal decal, Environment environment, Array<RenderableProvider> renderables) {
         this.decal = decal;
-        this.camera = camera;
 
-        if (!isVisible(decal)) {
+        if (!isVisible(camera, decal)) {
             return;
         }
 
         if (projectiveDecalShader != null) {
             projectiveDecalShader.setDecal(decal);
-            projectiveDecalShader.camera = camera;
         }
 
         modelBatch.begin(camera);
@@ -60,7 +55,7 @@ public class ProjectionDecalRenderer implements Disposable {
         modelBatch.end();
     }
 
-    private boolean isVisible(ProjectionDecal decal) {
+    private boolean isVisible(Camera camera, ProjectionDecal decal) {
         Vector3[] corners = decal.getVirtualCamera().frustum.planePoints;
         min.set(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY);
         max.set(Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY);
