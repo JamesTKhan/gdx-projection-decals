@@ -14,7 +14,7 @@ apply plugin: 'java-library'
 apply plugin: 'com.vanniktech.maven.publish'
 
 //Obviously, change the next line to match your project name.
-def projectName = 'libgdx-library-template'
+def projectName = 'gdx-projection-decals'
 
 group 'com.github.jamestkhan'
 
