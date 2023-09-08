@@ -2,7 +2,6 @@ package com.github.jamestkhan.decals;
 
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g3d.Material;
 
 /**
  * @author JamesTKhan
@@ -18,8 +17,6 @@ public class ProjectionDecal {
 
     // If true, will stretch the texture out to the edges of the frustum
     protected boolean stretch = false;
-
-    private Material material;
 
     public ProjectionDecal(PerspectiveCamera virtualCamera, Texture texture) {
         this.virtualCamera = virtualCamera;

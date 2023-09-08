@@ -106,13 +106,12 @@ public class ProjectiveDecalShader extends BaseShader {
         ColorAttribute ca = (ColorAttribute) renderable.environment.get(ColorAttribute.AmbientLight);
         set(u_ambientColor, ca.color.r, ca.color.g, ca.color.b);
 
-
         super.render(renderable);
     }
 
     @Override
     public void end() {
-        context.setDepthMask(true);
+//        context.setDepthMask(true);
         context.end();
         super.end();
 
