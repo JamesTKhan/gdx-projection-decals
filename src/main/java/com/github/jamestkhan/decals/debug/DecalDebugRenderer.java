@@ -18,7 +18,7 @@ import com.github.jamestkhan.decals.ProjectionDecal;
 public class DecalDebugRenderer {
     public Color frustumColor = Color.GOLD;
     public float frustumLineWidth = 2f;
-    public boolean renderFrustumAsLines = false;
+    public boolean renderFrustumAsLines = true;
 
     public boolean depthTestEnabled = true;
 

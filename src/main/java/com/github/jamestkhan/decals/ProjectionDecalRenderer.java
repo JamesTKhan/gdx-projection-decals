@@ -21,8 +21,8 @@ public class ProjectionDecalRenderer implements Disposable {
     private static final Vector3 min = new Vector3(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY);
     private static final Vector3 max = new Vector3(Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY);
 
-    private ProjectiveDecalShader projectiveDecalShader;
-    private final ModelBatch modelBatch;
+    protected ProjectiveDecalShader projectiveDecalShader;
+    protected final ModelBatch modelBatch;
 
     // The decal to render
     private ProjectionDecal decal;
@@ -37,6 +37,14 @@ public class ProjectionDecalRenderer implements Disposable {
                 }
                 return projectiveDecalShader;
             }
+
+            @Override
+            public Shader getShader(Renderable renderable) {
+                if (projectiveDecalShader != null) {
+                    projectiveDecalShader.setDecal(decal);
+                }
+                return super.getShader(renderable);
+            }
         });
     }
     public void render(Camera camera, ProjectionDecal decal, Environment environment, Array<RenderableProvider> renderables) {
@@ -44,10 +52,6 @@ public class ProjectionDecalRenderer implements Disposable {
 
         if (!isVisible(camera, decal)) {
             return;
-        }
-
-        if (projectiveDecalShader != null) {
-            projectiveDecalShader.setDecal(decal);
         }
 
         modelBatch.begin(camera);
