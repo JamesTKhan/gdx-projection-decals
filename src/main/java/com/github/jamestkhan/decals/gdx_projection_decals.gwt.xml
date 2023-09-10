@@ -23,7 +23,11 @@
 <module>
     <!-- This relative path points to the folder that has sources in it.
          This path is slash-separated and is relative to this file. -->
-    <source path="your_library"/>
+    <source path=""/>
+
+    <extend-configuration-property name="gdx.files.classpath" value="com/github/jamestkhan/shaders/projective_decal.frag.glsl" />
+    <extend-configuration-property name="gdx.files.classpath" value="com/github/jamestkhan/shaders/projective_decal.vert.glsl" />
+
     <!-- This is a good idea because so much GWT-specific code needs libGDX,
          like the libGDX reflection code. These "inherits" names are period-separated. -->
     <inherits name="com.badlogic.gdx.backends.gdx_backends_gwt" />

@@ -1,5 +1,6 @@
 package com.github.jamestkhan.decals;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
@@ -40,9 +41,17 @@ public class ProjectiveDecalShader extends BaseShader {
     public ProjectiveDecalShader(Renderable renderable) {
         super();
         this.renderable = renderable;
+
+        String prefix = "";
+        if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
+            prefix = "#version 120\n";
+        } else {
+            prefix = "#version 100\n";
+        }
+
         String vert = Gdx.files.classpath(VERTEX_SHADER).readString();
         String frag = Gdx.files.classpath(FRAGMENT_SHADER).readString();
-        program = new ShaderProgram(vert, frag);
+        program = new ShaderProgram(prefix + vert, frag);
         if (!program.isCompiled()) {
             throw new IllegalArgumentException("Error compiling shader: " + program.getLog());
         }
