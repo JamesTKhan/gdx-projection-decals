@@ -1,5 +1,6 @@
 package com.github.jamestkhan.decals;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
@@ -53,6 +54,8 @@ public class ProjectionDecalRenderer implements Disposable {
         if (!isVisible(camera, decal)) {
             return;
         }
+
+        decal.update(Gdx.graphics.getDeltaTime());
 
         modelBatch.begin(camera);
         modelBatch.render(renderables, environment);

@@ -36,7 +36,6 @@ public class ProjectiveDecalShader extends BaseShader {
     private ProjectionDecal decal;
 
     private Renderable renderable;
-    private float scrollSpeed = 0.0f;
 
     public ProjectiveDecalShader(Renderable renderable) {
         super();
@@ -96,14 +95,12 @@ public class ProjectiveDecalShader extends BaseShader {
         decalCamera.update();
         camera.update();
 
-        scrollSpeed += 0.0001f;
-
         set(u_projectiveMatrixLoc, camera.combined);
         set(u_decalProjectionMatrixLoc, decalCamera.combined);
         set(u_decalTextureLoc, context.textureBinder.bind(decal.texture));
         set(u_worldTransform, renderable.worldTransform);
         set(u_decalNearFar, decalCamera.near, decalCamera.far);
-        set(u_scrollSpeed, scrollSpeed);
+        set(u_scrollSpeed, decal.isScrolling() ? decal.getCurrentScroll() : 0.0f);
         set(u_stretchToFrustum, decal.isStretch() ? 1 : 0);
 
         // Get directional light from the environment

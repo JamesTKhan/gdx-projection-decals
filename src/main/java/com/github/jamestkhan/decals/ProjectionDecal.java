@@ -18,9 +18,21 @@ public class ProjectionDecal {
     // If true, will stretch the texture out to the edges of the frustum
     protected boolean stretch = false;
 
+    private boolean scrolling = false;
+
+    private float currentScroll = 0.0f;
+
+    private float scrollSpeed = 0.1f;
+
     public ProjectionDecal(PerspectiveCamera virtualCamera, Texture texture) {
         this.virtualCamera = virtualCamera;
         this.texture = texture;
+    }
+
+    public void update(float delta) {
+        if (scrolling) {
+            currentScroll += scrollSpeed * delta;
+        }
     }
 
     public void setVirtualCamera(PerspectiveCamera virtualCamera) {
@@ -47,4 +59,23 @@ public class ProjectionDecal {
         return stretch;
     }
 
+    public void setScrolling(boolean scrolling) {
+        this.scrolling = scrolling;
+    }
+
+    public boolean isScrolling() {
+        return scrolling;
+    }
+
+    public float getCurrentScroll() {
+        return currentScroll;
+    }
+
+    public void setScrollSpeed(float scrollSpeed) {
+        this.scrollSpeed = scrollSpeed;
+    }
+
+    public float getScrollSpeed() {
+        return scrollSpeed;
+    }
 }
