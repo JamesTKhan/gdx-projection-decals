@@ -13,7 +13,7 @@ ProjectionDecal decal = new ProjectionDecal(perspectiveCamera, texture);
         
 // Render your scene normally...
 ...
-// Render the decal each frame, instances is a list of ModelInstances to project onto
+// Render the decal each frame, instances is a list of RenderableProviders/ModelInstances to project onto
 decalRenderer.render(camera, decal, environment, instances);
 // Optional debug renderer, renders the decal's projection frustum
 decalDebugRenderer.render(camera, decal);
